@@ -36,5 +36,14 @@ static void ImprimirParametros()
 
 static void RodarUmaVez(int semente)
 {
+    Console.WriteLine("=== Algoritmo Genético para maximizar a função F6 ===");
+    Console.WriteLine();
+    Console.WriteLine($"Semente: {semente}");
+    ImprimirParametros();
 
+    var exemplo = Individuo.CriarAleatorio(new Random(semente));
+    Console.WriteLine("Exemplo de indivíduo (genótipo → fenótipo → aptidão):");
+    Console.WriteLine($"  Cromossomo (x | y): {exemplo.ToString()}");
+    Console.WriteLine($"  Decodificado:       {exemplo}");
+    Console.WriteLine();
 }

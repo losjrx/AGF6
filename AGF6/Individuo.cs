@@ -100,5 +100,19 @@ se for 0, é IGUAL ao bit binário anterior.
 
             return Parametros.limiteInferior + proporcao * amplitude;
         }
+
+        private string CromossomoComoTexto()
+        {
+            var bits = this.cromossomo.Select(b => b ? '1' : '0').ToArray();
+            string parteX = new string(bits, 0, Parametros.bitsPorVariavel);
+            string parteY = new string(bits, Parametros.bitsPorVariavel, Parametros.bitsPorVariavel);
+
+            return $"{parteX} | {parteY}";
+        }
+
+        public override string ToString()
+        {
+            return $"x = {this.X,11:F6} y = {this.Y,11:F6} F6 = {this.aptidao:F8}"; //11 caract. na tela e 6 casas decimais
+        }
     }
 }
