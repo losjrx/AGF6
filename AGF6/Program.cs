@@ -19,6 +19,7 @@ CultureInfo.CurrentCulture = new CultureInfo("pt-BR");
 if (args.Length > 0 && args[0].Equals("experimento", StringComparison.OrdinalIgnoreCase))
 {
     int execucoes = args.Length > 1 && int.TryParse(args[1], out int n) ? n : 30;
+    RodarExperimento(execucoes);
 
 } else
 {
@@ -46,4 +47,45 @@ static void RodarUmaVez(int semente)
     Console.WriteLine($"  Cromossomo (x | y): {exemplo.ToString()}");
     Console.WriteLine($"  Decodificado:       {exemplo}");
     Console.WriteLine();
+
+    var ag = new AlgoritmoGenetico(new Random(semente));
+    Individuo melhor = ag.Executar();
+
+    Console.WriteLine();
+    Console.WriteLine("=== Melhor solução encontrada ===");
+    Console.WriteLine($"  Cromossomo: {melhor.ToString()}");
+    Console.WriteLine($"  {melhor}");
+    Console.WriteLine($"  Ótimo teórico: x = 0, y = 0, F6 = 1");
+    Console.WriteLine($"  Diferença para o ótimo: {1.0 - melhor.aptidao:E3}");
+}
+
+static void RodarExperimento(int execucoes)
+{
+    const double limiarGlobal = 0.999;
+    ImprimirParametros();
+
+    int sucessos = 0;
+    double somaMelhores = 0;
+
+    for(int semente = 1; semente <= execucoes; semente++)
+    {
+        var ag = new AlgoritmoGenetico(new Random(semente));
+        Individuo melhor = ag.Executar();
+
+        bool achouOtimo = melhor.aptidao > limiarGlobal;
+
+        if (achouOtimo)
+        {
+            sucessos++;
+        }
+
+        somaMelhores += melhor.aptidao;
+
+        string situacao = achouOtimo ? "Ótimo global" : "Preso em máximo local";
+        Console.WriteLine($"Semente {semente,3}: {melhor} -> {situacao}");
+    }
+
+    Console.WriteLine();
+    Console.WriteLine($"Chegou ao ótimo global em {sucessos} de {execucoes} execuções ({(double)sucessos / execucoes:P0}).");
+    Console.WriteLine($"Média do melhor F6: {somaMelhores / execucoes:F6}");
 }
