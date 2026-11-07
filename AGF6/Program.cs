@@ -44,7 +44,7 @@ static void RodarUmaVez(int semente)
 
     var exemplo = Individuo.CriarAleatorio(new Random(semente));
     Console.WriteLine("Exemplo de indivíduo (genótipo → fenótipo → aptidão):");
-    Console.WriteLine($"  Cromossomo (x | y): {exemplo.ToString()}");
+    Console.WriteLine($"  Cromossomo (x | y): {exemplo.CromossomoComoTexto()}");
     Console.WriteLine($"  Decodificado:       {exemplo}");
     Console.WriteLine();
 
@@ -53,7 +53,7 @@ static void RodarUmaVez(int semente)
 
     Console.WriteLine();
     Console.WriteLine("=== Melhor solução encontrada ===");
-    Console.WriteLine($"  Cromossomo: {melhor.ToString()}");
+    Console.WriteLine($"  Cromossomo: {melhor.CromossomoComoTexto()}");
     Console.WriteLine($"  {melhor}");
     Console.WriteLine($"  Ótimo teórico: x = 0, y = 0, F6 = 1");
     Console.WriteLine($"  Diferença para o ótimo: {1.0 - melhor.aptidao:E3}");
@@ -70,7 +70,7 @@ static void RodarExperimento(int execucoes)
     for(int semente = 1; semente <= execucoes; semente++)
     {
         var ag = new AlgoritmoGenetico(new Random(semente));
-        Individuo melhor = ag.Executar();
+        Individuo melhor = ag.Executar(imprimir:false);
 
         bool achouOtimo = melhor.aptidao > limiarGlobal;
 

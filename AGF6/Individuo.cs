@@ -101,7 +101,7 @@ se for 0, é IGUAL ao bit binário anterior.
             return Parametros.limiteInferior + proporcao * amplitude;
         }
 
-        private string CromossomoComoTexto()
+        public string CromossomoComoTexto()
         {
             var bits = this.cromossomo.Select(b => b ? '1' : '0').ToArray();
             string parteX = new string(bits, 0, Parametros.bitsPorVariavel);

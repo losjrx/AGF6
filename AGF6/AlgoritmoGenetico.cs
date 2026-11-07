@@ -15,14 +15,17 @@ namespace AGF6
             _geradorAleatorio = geradorAleatorio;
         }
 
-        public Individuo Executar()
+        public Individuo Executar(bool imprimir = true)
         {
             List<Individuo> populacao = InicializarPopulacao();
 
             Individuo melhorDeTodos = MelhorDaPopulacao(populacao);
 
-            ImprimirCabecalhoRelatorio();
-            ImprimirGeracao(0, populacao);
+            if (imprimir)
+            {
+                ImprimirCabecalhoRelatorio();
+                ImprimirGeracao(0, populacao);
+            }
 
             /*
              * Evolução
@@ -41,7 +44,7 @@ namespace AGF6
 
                 bool gerarRelatorio = geracao % Parametros.intervaloImpressao == 0 || geracao == Parametros.numeroGeracoes;
 
-                if (gerarRelatorio)
+                if (imprimir && gerarRelatorio)
                 {
                     ImprimirGeracao(geracao, populacao);
                 }
@@ -158,8 +161,9 @@ namespace AGF6
 
         public static void ImprimirCabecalhoRelatorio()
         {
-            Console.WriteLine($"{"Geração",7} | {"Melhor F6",12} | {"Média F6",12} | {"x do melhor",12} | {"y do melhor",12}");
-            Console.WriteLine(new string('-', 68));
+            string cabecalho = $"{"Geração",7} | {"Melhor F6",12} | {"Média F6",12} | {"x do melhor",12} | {"y do melhor",12}";
+            Console.WriteLine(cabecalho);
+            Console.WriteLine(new string('-', cabecalho.Length));
         }
 
         private static void ImprimirGeracao(int geracao, List<Individuo> populacao)
