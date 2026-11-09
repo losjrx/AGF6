@@ -12,7 +12,6 @@ namespace AGF6
         public const double limiteSuperior = 100.0;
         public const int bitsPorVariavel = 22;
         public const int tamanhoCromossomo = bitsPorVariavel * 2;
-        public const bool usarBinarioRefletido = true;
         public const int tamanhoPopulacao = 100;
         public const int numeroGeracoes = 400;
         public const double taxaCruzamento = 0.65;
