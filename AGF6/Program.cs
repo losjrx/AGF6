@@ -77,9 +77,8 @@ static void RodarExperimento(int execucoes)
         if (achouOtimo)
         {
             sucessos++;
+            somaMelhores += melhor.aptidao;
         }
-
-        somaMelhores += melhor.aptidao;
 
         string situacao = achouOtimo ? "Ótimo global" : "Preso em máximo local";
         Console.WriteLine($"Semente {semente,3}: {melhor} -> {situacao}");
@@ -87,5 +86,5 @@ static void RodarExperimento(int execucoes)
 
     Console.WriteLine();
     Console.WriteLine($"Chegou ao ótimo global em {sucessos} de {execucoes} execuções ({(double)sucessos / execucoes:P0}).");
-    Console.WriteLine($"Média do melhor F6: {somaMelhores / execucoes:F6}");
+    Console.WriteLine($"Média dos melhores F6: {somaMelhores / sucessos:F6}");
 }
